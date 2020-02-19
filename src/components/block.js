@@ -83,10 +83,13 @@ const BlockGroup = props => {
           15,
           -15
         );
-        noiseX *= Math.sin(d * wave - tm) * (vAmp * 0.75);
-        noiseX *= Math.sin(d * wave - tm) * (vAmp * 0.75);
-
-        const hght = isVox ? Math.floor(noiseX * (amp * 12)) * spc : noiseX;
+        let voxHeight = (amp * 12);
+        if (wave > .01) {
+          noiseX *= Math.sin(d * wave - tm) * (vAmp * 0.75);
+        } else {
+          voxHeight = (amp * 4);
+        }
+        const hght = isVox ? Math.floor(noiseX * voxHeight) * spc : noiseX;
         const px = ~~((Math.abs(hght) * tAmp) / vAmp);
         const tt = 10 + px;
         const tp = tt > 999 ? 999 : tt;

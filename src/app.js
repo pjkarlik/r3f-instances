@@ -58,7 +58,7 @@ const App = () => {
   const [wave, setWave] = useState(options.wave);
   const [amp, setAmp] = useState(options.amp);
   const [isVox, setVox] = useState(options.isVox);
-  const [lcolor, setColor] = useState([150, 150, 255]);
+  const [lcolor, setColor] = useState('#0099ff');
   const lightColor = useRef();
 
   useEffect(() => {
@@ -66,7 +66,8 @@ const App = () => {
       iter,
       amp,
       isVox,
-      wave
+      wave,
+      lcolor
     };
     const gui = new dat.GUI();
     const folderRender = gui.addFolder("Render Options");
@@ -88,13 +89,9 @@ const App = () => {
       .onFinishChange(value => {
         setAmp(value);
       });
-    // folderRender.addColor(options, "lcolor").onChange(value => {
-    //   const r = parseInt(~~value[0], 10);
-    //   const g = parseInt(~~value[1], 10);
-    //   const b = parseInt(~~value[2], 10);
-    //   const color = [r, g, b];
-    //   setColor(color);
-    // });
+    folderRender.addColor(options, "lcolor").onChange(value => {
+      setColor(value);
+    });
     folderRender.add(options, "isVox").onFinishChange(value => {
       setVox(value);
     });
@@ -126,7 +123,7 @@ const App = () => {
       >
         <Controls />
         <pointLight position={[-1, 18, -3]} color="#CCCCCC" />
-        <pointLight position={[-1, -28, 21]} color="#ffCCCC" />
+        <pointLight position={[-1, -28, 21]} color={lcolor} />
         <pointLight ref={lightColor} position={[1, 20, -12]} color={lcolor} />
         <BlockMap config={config} />
         <Effects />
