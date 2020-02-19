@@ -42,7 +42,7 @@ const BlockMap = props => {
   );
 };
 
-const options = { iter: 0.07, wave: 0.05, amp: 1.8, isVox: false };
+const options = { iter: 0.07, wave: 0.06, amp: 2.3, isVox: false };
 
 const Controls = props => {
   const ref = useRef();
@@ -78,13 +78,13 @@ const App = () => {
         setIter(value);
       });
     folderRender
-      .add(options, "wave", 0.01, 0.4)
+      .add(options, "wave", 0.01, 1.4)
       .step(0.01)
       .onFinishChange(value => {
         setWave(value);
       });
     folderRender
-      .add(options, "amp", 0.1, 5)
+      .add(options, "amp", 0.1, 2.5)
       .step(0.01)
       .onFinishChange(value => {
         setAmp(value);

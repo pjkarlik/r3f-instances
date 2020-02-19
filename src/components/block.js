@@ -64,7 +64,7 @@ const BlockGroup = props => {
       for (let x = 0; x < cols; x++) {
         const id = i++;
 
-        const tm = time * 0.5;
+        const tm = time * 0.75;
 
         let noiseX =
           generator.noise3D(
