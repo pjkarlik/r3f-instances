@@ -21,8 +21,9 @@ const BlockMap = props => {
   const { position, config } = props;
   const blockMap = useRef();
   useFrame(() => {
-    //blockMap.current.rotation.y += 0.004;
-    //blockMap.current.rotation.x -= 0.008;
+    // uncomment to rotate group of components
+    // blockMap.current.rotation.y += 0.004;
+    // blockMap.current.rotation.x -= 0.008;
   });
 
   return (
@@ -42,7 +43,7 @@ const BlockMap = props => {
   );
 };
 
-const options = { iter: 0.07, wave: 0.06, amp: 2.3, isVox: false };
+const options = { iter: 0.11, wave: 0.1, amp: 1.75, isVox: false };
 
 const Controls = props => {
   const ref = useRef();
@@ -58,7 +59,8 @@ const App = () => {
   const [wave, setWave] = useState(options.wave);
   const [amp, setAmp] = useState(options.amp);
   const [isVox, setVox] = useState(options.isVox);
-  const [lcolor, setColor] = useState('#0099ff');
+  const [lcolor, setColor1] = useState("#0099ff");
+  const [dcolor, setColor2] = useState("#FF6600");
   const lightColor = useRef();
 
   useEffect(() => {
@@ -67,7 +69,8 @@ const App = () => {
       amp,
       isVox,
       wave,
-      lcolor
+      lcolor,
+      dcolor
     };
     const gui = new dat.GUI();
     const folderRender = gui.addFolder("Render Options");
@@ -78,19 +81,22 @@ const App = () => {
         setIter(value);
       });
     folderRender
-      .add(options, "wave", 0.01, 1.4)
+      .add(options, "wave", 0.01, 0.8)
       .step(0.01)
       .onFinishChange(value => {
         setWave(value);
       });
     folderRender
-      .add(options, "amp", 0.1, 2.5)
+      .add(options, "amp", 0.1, 3.5)
       .step(0.01)
       .onFinishChange(value => {
         setAmp(value);
       });
     folderRender.addColor(options, "lcolor").onChange(value => {
-      setColor(value);
+      setColor1(value);
+    });
+    folderRender.addColor(options, "dcolor").onChange(value => {
+      setColor2(value);
     });
     folderRender.add(options, "isVox").onFinishChange(value => {
       setVox(value);
@@ -122,8 +128,8 @@ const App = () => {
         }}
       >
         <Controls />
-        <pointLight position={[-1, 18, -3]} color="#CCCCCC" />
-        <pointLight position={[-1, -28, 21]} color={lcolor} />
+        <pointLight position={[-1, 18, -22]} color="#CCCCCC" />
+        <pointLight position={[-1, -28, 21]} color={dcolor} />
         <pointLight ref={lightColor} position={[1, 20, -12]} color={lcolor} />
         <BlockMap config={config} />
         <Effects />
