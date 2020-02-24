@@ -35,6 +35,11 @@ const BlockMap = props => {
       <BlockContainer {...config} position={[7.5, 0, 0]} />
       <BlockContainer {...config} position={[-7.5, 0, 0]} />
 
+      <BlockContainer {...config} position={[0, 0, 15]} />
+      <BlockContainer {...config} position={[0, 0, -15]} />
+      <BlockContainer {...config} position={[15, 0, 0]} />
+      <BlockContainer {...config} position={[-15, 0, 0]} />
+
       <BlockContainer {...config} position={[7.5, 0, 7.5]} />
       <BlockContainer {...config} position={[7.5, 0, -7.5]} />
       <BlockContainer {...config} position={[-7.5, 0, -7.5]} />
